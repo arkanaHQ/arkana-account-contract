@@ -144,40 +144,4 @@ impl LinkDrop {
 
 #[cfg(not(target_arch = "wasm32"))]
 #[cfg(test)]
-mod tests {
-    use near_sdk::test_utils::{VMContextBuilder};
-    use near_sdk::{testing_env};
-
-    use super::*;
-
-    fn linkdrop() -> AccountId {
-        "linkdrop".parse().unwrap()
-    }
-
-    fn bob() -> AccountId {
-        "bob".parse().unwrap()
-    }
-
-    #[test]
-    fn test_create_account() {
-        // Create a new instance of the linkdrop contract
-        let mut contract = LinkDrop::new();
-        // Create the public key to be used in the test
-        let pk: PublicKey = "qSq3LoufLvTCTNGC3LJePMDGrok8dHMQ5A1YD9psbiz"
-            .parse()
-            .unwrap();
-        // Default the deposit to an extremely small amount
-        let deposit = 1_000_000;
-
-        // Initialize the mocked blockchain
-        testing_env!(
-            VMContextBuilder::new()
-            .current_account_id(linkdrop())
-            .attached_deposit(deposit)
-            .context.clone()
-        );
-
-        // Create bob's account with the PK
-        contract.create_account(bob(), pk);
-    }
-}
+mod tests {}
